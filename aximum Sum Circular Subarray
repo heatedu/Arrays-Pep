@@ -1,0 +1,22 @@
+First find the maximum subarray sum in the straight array without considering circular behaviour.
+to find the maximum circular subarray sum first find the minimum subarray sum of the array without considering circular behaviour.
+maximum circular subarray sum will be equal to total sum - minimum subarray sum of the array.
+Now the ans is maximum of maximum subarray sum and maximum subarray sum in circular behaviour
+Also if the array is all negative elements(or you can say minn=tsum) then the answer is maximum subarray without circular - this is a boundary case which you neet to check.
+
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+        int maxx=INT_MIN,minn=INT_MAX,sum1=0,sum2=0,tsum=0;   
+        for(auto x:A)
+        {
+            tsum+=x; sum1+=x; sum2+=x;
+            maxx=max(maxx,sum1);
+            if(sum1<0) sum1=0;
+            minn=min(sum2,minn);
+            if(sum2>0) sum2=0;
+        }
+        if(tsum==minn) return maxx;             // if all the elements of array are negative.
+        else return max(maxx,tsum-minn);
+    }
+};
