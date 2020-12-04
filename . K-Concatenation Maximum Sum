@@ -1,0 +1,41 @@
+#define MOD 1000000007
+int kadanes(vector<int>&arr)
+{
+    int max_so_far=INT_MIN;
+    int max_ending_here=0;
+    for(int i=0;i<arr.size();i++)
+    {
+        max_ending_here=(max_ending_here%MOD+arr[i]%MOD)%MOD;
+        if(max_ending_here>max_so_far)
+            max_so_far=max_ending_here;
+        if(max_ending_here<0)
+            max_ending_here=0;
+    }
+    return max_so_far;
+}
+int kadanestwo(vector<int>&a)
+{
+   vector<int>arr;
+    int w=2;
+    while(w--)
+    {
+       for(int i=0;i<a.size();i++)
+           arr.push_back(a[i]);
+    }
+    return kadanes(arr);
+}
+class Solution {
+public:
+    int kConcatenationMaxSum(vector<int>& arr, int k) {
+        int n=arr.size();
+        int sum=0;
+        for(int i=0;i<n;i++)
+            sum=((sum%MOD)+(arr[i]%MOD))%MOD;
+        if(k==1)
+            return kadanes(arr);
+        else if(sum<0)
+            return kadanestwo(arr);
+        else
+            return (kadanestwo(arr))%MOD+((((k-2)%MOD)*(sum%MOD))%MOD)%MOD;
+    }
+};
