@@ -1,0 +1,8 @@
+ya th ese krlo ki arr dep sab ek array m hi lelo lkin input lo pair<int,char>ka jb arrival ka input loge th <arrivaltime,A>input lena vrna <dept time,D>input lena 
+
+fr puri array ko krlo sort
+ab bni acc th gfg input
+
+9A 910D 940A 950A 1100A 1120D  1130D 1200D 1500A 1800A 1900D 2000D 
+
+AB JHAAN A AAE VHA th x++ krte jao aur jhaan departure aae vhaa x-- krte jaao aur hmesha ex maxs=max(maxs,x) yh maintain krna jrur
