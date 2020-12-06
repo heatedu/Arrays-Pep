@@ -1,0 +1,44 @@
+//IF ONLY ONE TRANSACTION
+REF: https://www.youtube.com/watch?v=4YjEHmw1MX0&list=PL-Jc9J83PIiG8fE6rj9F5a6uyQ5WPdqKy&index=30&t=21s
+QUES:https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()==0)
+            return 0;
+       int mins=prices[0];
+        int ans=0;
+        for(int i=1;i<prices.size();i++)
+        {
+            mins=min(mins,prices[i]);
+            ans=max(ans,prices[i]-mins);
+        }
+        return ans;
+    }
+};
+
+//MULTIPLE TRANSACTION BUT JBTK SELL NHI KIA TBTK DUSRA BUY NHI KRSKTE (SAARE INCREASING STROKES KHARREEDTE  JAAO)
+REF: https://www.youtube.com/watch?v=HWJ9kIPpzXs&list=PL-Jc9J83PIiG8fE6rj9F5a6uyQ5WPdqKy&index=31
+QUES:https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+      int bd=0,sd=0,profit=0;
+        int n=prices.size();
+        for(int i=1;i<n;i++)
+        {
+            if(prices[i]>=prices[i-1])
+                sd++;
+            else
+            {
+                profit+=prices[sd]-prices[bd];
+                bd=sd=i;
+            }
+        }
+        profit+=prices[sd]-prices[bd];//for increasing array
+        return profit;
+    }
+};
+
