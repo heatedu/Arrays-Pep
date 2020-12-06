@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& a) {
+       int n=a.size(); 
+        //Transpose lelo
+        for(int i=0;i<n;i++)
+        {
+            //bss upper triangle m hi kaam krna h vrna vps swap krkr same ho jaega
+            for(int j=i;j<n;j++)
+                swap(a[i][j],a[j][i]);
+        }
+        //ab bss row reverse krdo
+        for(int i=0;i<n;i++)
+        {
+          int l=0,h=n-1;
+          while(l<h)
+          {
+             swap(a[i][l],a[i][h]);
+             l++;
+             h--;
+           }
+        }
+    }
+};
