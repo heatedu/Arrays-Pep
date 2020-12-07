@@ -26,3 +26,42 @@ public:
         return bsearch(l,h,a,n,key);
     }
 };
+Ques:https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+
+When duplicates allowed
+
+int bsearch(int l,int h,vector<int>&a,int n,int key)
+{
+    if(l>h)
+        return -1;
+    int mid=(l+h)/2;
+    if (a[mid] == key) 
+    return mid;
+    //line 8 and 9 extra added or line 11 12 are also giving AC
+    // if( (a[l] == a[h]) && (a[mid] == a[l]))
+    //     return bsearch(l+1,h-1,a,n,key);
+    if(a[mid]==a[l])
+        return bsearch(l+1,h,a,n,key);
+    if(a[mid]>=a[l])
+    {
+        if(key<a[mid]&&key>=a[l])
+            return bsearch(l,mid-1,a,n,key);
+        return bsearch(mid+1,h,a,n,key);
+    }
+    else
+    {
+        if(key>a[mid]&&key>a[h]||key<a[mid])
+            return bsearch(l,mid-1,a,n,key);
+        return bsearch(mid+1,h,a,n,key);
+    }
+}
+class Solution {
+public:
+    bool search(vector<int>&a, int key) {
+         int n=a.size();
+        int l=0,h=n-1;
+        if(bsearch(l,h,a,n,key)>=0)
+            return true;
+        return false;
+    }
+};
