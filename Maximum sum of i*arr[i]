@@ -1,0 +1,37 @@
+Method 2: This method discusses the efficient solution which solves the problem in O(n) time. In the naive solution, the values were calculated for every rotation. So if that can be done in constant time then the complexity will decrease.
+
+Approach: The basic approach is to calculate the sum of new rotation from the previous rotations. This brings up a similarity where only the multipliers of first and last element change drastically and the multiplier of every other element increases or decreases by 1. So in this way, the sum of next rotation can be calculated from the sum of present rotation.
+Algorithm:
+The idea is to compute the value of a rotation using values of previous rotation. When an array is rotated by one, following changes happen in sum of i*arr[i].
+1.Multiplier of arr[i-1] changes from 0 to n-1, i.e., arr[i-1] * (n-1) is added to current value.
+2.Multipliers of other terms is decremented by 1. i.e., (cum_sum – arr[i-1]) is subtracted from current value where cum_sum is sum of all numbers.
+
+int maxSum(int arr[], int n) 
+{ 
+    
+    int cum_sum = 0; 
+    for (int i=0; i<n; i++) 
+        cum_sum += arr[i]; 
+   
+    int curr_val = 0; 
+    for (int i=0; i<n; i++) 
+        curr_val += i*arr[i]; 
+  
+    int res = curr_val; 
+  
+    // Compute values for other iterations 
+    for (int i=1; i<n; i++) 
+    { 
+        // Compute next value using previous  
+        // value in O(1) time 
+        int next_val = curr_val - (cum_sum - arr[i-1]) 
+                       + arr[i-1] * (n-1); 
+  
+     
+        curr_val = next_val; 
+          res = max(res, next_val); 
+    } 
+  
+    return res; 
+} 
+  
