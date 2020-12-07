@@ -1,0 +1,31 @@
+void rearrange(int a[], int n) {
+	  int i=0,j=n-1;
+	  while(i<=j)
+	  {
+	      if(a[i]>=0 &&a[j]<0)
+	      {
+	          i++;
+	          j--;
+	      }
+	      else if(a[i]<0&&a[j]>=0)
+	      {
+	          swap(a[i],a[j]);
+	          i++;j--;
+	      }
+	      else if(a[i]>=0 and a[j]>=0)
+	      i++;
+	      else
+	      j--;
+	  }
+	  //a[i] is sorted in such a manner that all starting is positive and thn all negative
+	  //now i is pointinig to first negative number
+	   int pos =0, neg =i; 
+	    while (pos < n && neg < pos &&  
+                     arr[neg] < 0) 
+    { 
+        swap(&arr[neg], &arr[pos]); 
+        pos++; 
+        neg += 2; 
+    }
+	  
+	}
