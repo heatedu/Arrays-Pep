@@ -1,0 +1,28 @@
+int bsearch(int l,int h,vector<int>&a,int n,int key)
+{
+    if(l>h)
+        return -1;
+    int mid=(l+h)/2;
+    if (a[mid] == key) 
+    return mid;
+    if(a[mid]>=a[l])
+    {
+        if(key<a[mid]&&key>=a[l])
+            return bsearch(l,mid-1,a,n,key);
+        return bsearch(mid+1,h,a,n,key);
+    }
+    else
+    {
+        if(key>a[mid]&&key>a[h]||key<a[mid])
+            return bsearch(l,mid-1,a,n,key);
+        return bsearch(mid+1,h,a,n,key);
+    }
+}
+class Solution {
+public:
+    int search(vector<int>& a, int key) {
+        int n=a.size();
+        int l=0,h=n-1;
+        return bsearch(l,h,a,n,key);
+    }
+};
