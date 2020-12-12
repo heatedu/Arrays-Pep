@@ -1,0 +1,42 @@
+1) We first compute maximum sum till every index and store it in an array maxSum[].
+2) After filling the array, we use the sliding window concept of size k. Keep track of sum of current k elements.
+To compute sum of current window, remove first element of previous window and add current element. After getting the sum of current window, 
+we add the maxSum of the previous window,
+if it is greater than current max, then update it else not.
+
+int maxSumWithK(int a[], int n, int k) 
+{ 
+    // maxSum[i] is going to store maximum sum 
+    // till index i such that a[i] is part of the 
+    // sum. 
+    int maxSum[n]; 
+    maxSum[0] = a[0]; 
+  
+    // We use Kadane's algorithm to fill maxSum[] 
+    // Below code is taken from method 3 of 
+    // https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/ 
+    int curr_max = a[0]; 
+    for (int i = 1; i < n; i++) 
+    { 
+        curr_max = max(a[i], curr_max+a[i]); 
+        maxSum[i] = curr_max; 
+    } 
+  
+    // Sum of first k elements 
+    int sum = 0; 
+    for (int i = 0; i < k; i++) 
+        sum += a[i]; 
+  
+    // Use the concept of sliding window 
+    int result = sum; 
+    for (int i = k; i < n; i++) 
+    { 
+        sum = sum + a[i] - a[i-k]; 
+        result = max(result, sum); 
+  
+        // Include maximum sum till [i-k] also 
+        // if it increases overall max. 
+        result = max(result, sum + maxSum[i-k]); 
+    } 
+    return result; 
+} 
